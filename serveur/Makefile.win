@@ -1,0 +1,33 @@
+# Project: serveur
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = serveur_private.res
+OBJ  = main_serveur.o $(RES)
+LINKOBJ  = main_serveur.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -mwindows -lmingw32 -lSDLmain -lSDL -lSDL_image C:/Dev-Cpp/lib/libwsock32.a  
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = serveur.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before serveur.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "serveur.exe" $(LIBS)
+
+main_serveur.o: main_serveur.c
+	$(CC) -c main_serveur.c -o main_serveur.o $(CFLAGS)
+
+serveur_private.res: serveur_private.rc 
+	$(WINDRES) -i serveur_private.rc --input-format=rc -o serveur_private.res -O coff 
